@@ -1,0 +1,445 @@
+/* ============================================================
+   Meu Perfil — Biblioteca
+   Direção visual: cartão de biblioteca / ficha de empréstimo
+   antiga — não um dashboard de SaaS genérico. Papel creme,
+   tinta azul-marinho, réguas de ledger, selos dourados só nas
+   conquistas desbloqueadas.
+   ============================================================ */
+
+:root {
+  --navy-950: #0f2136;
+  --navy-800: #173a57;
+  --navy-700: #204a6c;
+  --blue-accent: #4a86b8;
+  --paper: #f4efe1;
+  --paper-raised: #fbf8ef;
+  --rule: #cdbf9c;
+  --ink: #1d2733;
+  --ink-soft: #5b6472;
+  --gold: #a8791f;
+  --gold-bright: #c99a2e;
+  --gold-soft: #ecdcac;
+  --locked: #b9b2a2;
+
+  --font-display: 'Iowan Old Style', Palatino, 'Palatino Linotype', Georgia, 'Times New Roman', serif;
+  --font-body: 'Segoe UI', system-ui, -apple-system, Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-padding-top: 1rem; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+img, svg { max-width: 100%; }
+
+/* ---------- Header ---------- */
+
+.ticket-header {
+  background: var(--navy-950);
+  color: var(--paper-raised);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-bottom: 3px solid var(--gold);
+  flex-wrap: wrap;
+}
+
+.ticket-header__mark {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.ticket-header__glyph { font-size: 1.4rem; }
+
+.ticket-header__wordmark {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.02em;
+}
+
+.ticket-header__account {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--gold-soft);
+}
+
+.ticket-header__account select {
+  background: var(--navy-800);
+  color: var(--paper-raised);
+  border: 1px solid var(--navy-700);
+  border-radius: 3px;
+  padding: 0.35rem 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+}
+
+/* ---------- Layout ---------- */
+
+.ledger {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+  display: grid;
+  gap: 1.25rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.card {
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1.4rem 1.5rem;
+  grid-column: 1 / -1;
+}
+
+.card h2 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  margin: 0 0 0.85rem;
+  color: var(--navy-950);
+}
+
+.secao-nota {
+  margin: -0.5rem 0 1rem;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+  letter-spacing: 0.03em;
+}
+
+/* ---------- Perfil ---------- */
+
+.card--profile {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background: linear-gradient(180deg, var(--paper-raised) 0%, var(--paper-raised) 100%);
+  position: relative;
+}
+
+.card--profile::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  border: 1px dashed var(--rule);
+  margin: 6px;
+  pointer-events: none;
+}
+
+.card--profile__id {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 1;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--navy-800);
+  color: var(--paper-raised);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.card--profile h1 {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  margin: 0.1rem 0;
+  color: var(--navy-950);
+}
+
+.membro-desde {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--ink-soft);
+}
+
+.card--profile__pontuacao {
+  z-index: 1;
+  min-width: 220px;
+  text-align: right;
+}
+
+.nivel-selo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--navy-950);
+  color: var(--gold-soft);
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
+}
+
+.nivel-selo__numero {
+  background: var(--gold);
+  color: var(--navy-950);
+  font-weight: 700;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+}
+
+.pontos-total {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  margin: 0.5rem 0 0.6rem;
+  color: var(--navy-950);
+  font-variant-numeric: tabular-nums;
+}
+
+.progresso__trilha {
+  width: 100%;
+  height: 10px;
+  background: var(--rule);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.progresso__preenchido {
+  height: 100%;
+  background: linear-gradient(90deg, var(--blue-accent), var(--navy-800));
+  border-radius: 999px;
+  transition: width 0.6s ease;
+  width: 0%;
+}
+
+.progresso__legenda {
+  margin: 0.4rem 0 0;
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Estatísticas ---------- */
+
+.card--stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  text-align: center;
+  padding: 1.1rem 1rem;
+}
+
+.stat__valor {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--navy-950);
+  font-variant-numeric: tabular-nums;
+}
+
+.stat__rotulo {
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+/* ---------- Conquistas ---------- */
+
+.card--conquistas { grid-column: 1 / span 1; }
+.card--historico { grid-column: 2 / span 1; }
+
+.lista-conquistas {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.conquista {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+  padding: 0.6rem 0.7rem;
+  border-radius: 4px;
+  border: 1px solid var(--rule);
+  background: var(--paper);
+  transition: transform 0.15s ease;
+}
+
+.conquista:hover { transform: translateX(2px); }
+
+.conquista[data-status="bloqueada"] {
+  opacity: 0.65;
+}
+
+.conquista__selo {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+}
+
+.conquista[data-status="desbloqueada"] .conquista__selo {
+  background: var(--gold-bright);
+  color: var(--navy-950);
+}
+
+.conquista[data-status="bloqueada"] .conquista__selo {
+  background: var(--locked);
+  color: var(--paper-raised);
+}
+
+.conquista__texto strong {
+  display: block;
+  font-size: 0.92rem;
+  color: var(--navy-950);
+}
+
+.conquista__texto span {
+  font-size: 0.8rem;
+  color: var(--ink-soft);
+}
+
+.conquista__data {
+  margin-left: auto;
+  font-size: 0.72rem;
+  color: var(--gold);
+  white-space: nowrap;
+  align-self: center;
+}
+
+/* ---------- Histórico ---------- */
+
+.card--historico__cabecalho {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.botao-texto {
+  background: none;
+  border: none;
+  color: var(--blue-accent);
+  font-size: 0.82rem;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.botao-texto:hover { color: var(--navy-950); }
+
+.lista-historico {
+  list-style: none;
+  margin: 0.8rem 0 0;
+  padding: 0;
+}
+
+.lista-historico li {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.85rem;
+}
+
+.lista-historico li:last-child { border-bottom: none; }
+
+.lista-historico .h-motivo { color: var(--ink); }
+.lista-historico .h-data { color: var(--ink-soft); font-size: 0.75rem; }
+.lista-historico .h-pontos {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: var(--navy-800);
+  white-space: nowrap;
+}
+
+.lista-historico li[hidden] { display: none; }
+
+/* ---------- Ranking ---------- */
+
+.ranking-tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.ranking-tabela th {
+  text-align: left;
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--ink-soft);
+  border-bottom: 2px solid var(--navy-950);
+  padding: 0.5rem 0.6rem;
+}
+
+.ranking-tabela td {
+  padding: 0.55rem 0.6rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+.ranking-tabela tr[data-atual="true"] td {
+  background: var(--gold-soft);
+  font-weight: 600;
+}
+
+.ranking-posicao {
+  font-family: var(--font-display);
+  color: var(--gold);
+}
+
+/* ---------- Rodapé ---------- */
+
+.rodape {
+  text-align: center;
+  color: var(--ink-soft);
+  font-size: 0.78rem;
+  padding: 0 1.25rem 2rem;
+}
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 680px) {
+  .ledger { grid-template-columns: 1fr; }
+  .card--conquistas, .card--historico { grid-column: 1 / -1; }
+  .card--stats { grid-template-columns: repeat(2, 1fr); }
+  .card--profile__pontuacao { text-align: left; width: 100%; }
+}
+
+/* ---------- Acessibilidade ---------- */
+
+:focus-visible {
+  outline: 2px solid var(--blue-accent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .progresso__preenchido, .conquista { transition: none; }
+}
